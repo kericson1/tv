@@ -38696,7 +38696,7 @@ var render = function () {
               {
                 key: task.id,
                 staticClass:
-                  "list-group-item d-fex justify-content-end align-items-center",
+                  "list-group-item d-fex justify-content-end align-items-center mb-2",
               },
               [
                 _c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(task.name))]),

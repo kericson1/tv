@@ -16,7 +16,7 @@
     </div>
     <ul class="list-group">
       <li
-        class="list-group-item d-fex justify-content-end align-items-center"
+        class="list-group-item d-fex justify-content-end align-items-center mb-2"
         v-for="task in tasks.data"
         :key="task.id"
       >
