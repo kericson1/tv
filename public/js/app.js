@@ -2109,10 +2109,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -38707,11 +38703,10 @@ var render = function () {
                 _vm._v(" "),
                 _c("span", { staticClass: "float-right" }, [
                   _c(
-                    "button",
+                    "a",
                     {
-                      staticClass: "btn btn-primary",
                       attrs: {
-                        type: "button",
+                        href: "#",
                         "data-toggle": "modal",
                         "data-target": "#editModal",
                       },
@@ -38721,21 +38716,30 @@ var render = function () {
                         },
                       },
                     },
-                    [_vm._v("\n          Modifier\n        ")]
+                    [
+                      _c("i", {
+                        staticClass: "bi bi-pencil-square text-primary",
+                        staticStyle: { "font-size": "25px" },
+                      }),
+                    ]
                   ),
                   _vm._v(" "),
                   _c(
-                    "button",
+                    "a",
                     {
-                      staticClass: "btn btn-danger",
-                      attrs: { type: "button" },
+                      attrs: { href: "#" },
                       on: {
                         click: function ($event) {
                           return _vm.deleteTask(task.id)
                         },
                       },
                     },
-                    [_vm._v("\n          Supprimer\n        ")]
+                    [
+                      _c("i", {
+                        staticClass: "bi bi-trash text-danger",
+                        staticStyle: { "font-size": "25px" },
+                      }),
+                    ]
                   ),
                 ]),
               ]

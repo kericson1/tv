@@ -22,22 +22,18 @@
       >
         <a href="#">{{ task.name }}</a>
         <span class="float-right">
-          <button
-            type="button"
-            class="btn btn-primary"
+          <a href="#"
             data-toggle="modal"
             data-target="#editModal"
             @click="getTask(task.id)"
           >
-            Modifier
-          </button>
-          <button
-            type="button"
-            class="btn btn-danger"
+		  <i class="bi bi-pencil-square text-primary" style="font-size: 25px;"></i>
+          </a>
+          <a href="#"
             @click="deleteTask(task.id)"
           >
-            Supprimer
-          </button>
+            <i class="bi bi-trash text-danger" style="font-size: 25px;"></i>
+          </a>
         </span>
       </li>
       <edit-task
