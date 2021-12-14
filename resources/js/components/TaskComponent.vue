@@ -1,18 +1,55 @@
-<template name="component-name">
+<template>
   <div class="container mt-5">
-      <div class="mb-3">
-          <add-task @task-added="refresh"></add-task>
+    <div class="form-row mb-3">
+      <div class="col-row">
+        <input
+          type="text"
+          class="form-control"
+          @keyup="searchtask"
+          v-model="q"
+          placeholder="Rechercher une tâche"
+        />
       </div>
+    </div>
+    <div class="mb-3">
+      <add-task @task-added="refresh"></add-task>
+    </div>
     <ul class="list-group">
-      <li class="list-group-item" v-for="task in tasks.data" :key="task.id">
+      <li
+        class="list-group-item d-fex justify-content-end align-items-center"
+        v-for="task in tasks.data"
+        :key="task.id"
+      >
         <a href="#">{{ task.name }}</a>
-        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#editModal" @click="getTask(task.id)">
+        <span class="float-right">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#editModal"
+            @click="getTask(task.id)"
+          >
             Modifier
-        </button>
-        <edit-task v-bind:tasktoedit="tasktoedit"></edit-task>
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            @click="deleteTask(task.id)"
+          >
+            Supprimer
+          </button>
+        </span>
       </li>
+      <edit-task
+        v-bind:tasktoedit="tasktoedit"
+        @task-updated="refresh"
+      ></edit-task>
     </ul>
-    <pagination :data="tasks" @pagination-change-page="getResults" class="mt-5"></pagination>
+    <pagination
+      :data="tasks"
+      @pagination-change-page="getResults"
+      class="mt-5"
+    ></pagination>
   </div>
 </template>
 
@@ -21,24 +58,43 @@ export default {
   data() {
     return {
       tasks: {},
-      tasktoedit: ''
+      tasktoedit: "",
+      q: "",
     };
   },
   methods: {
     getResults(page = 1) {
-      axios.get("/taskslist?page=" + page)
-      .then((response) => {
+      axios.get("/taskslist?page=" + page).then((response) => {
         this.tasks = response.data;
       });
     },
-    getTask(id){
-        axios.get('/task/edit/'+id)
-        .then(response => this.tasktoedit = response.data)
-        .catch(error => console.log(error));
-    }
-    ,
+    getTask(id) {
+      axios
+        .get("/task/edit/" + id)
+        .then((response) => (this.tasktoedit = response.data))
+        .catch((error) => console.log(error));
+    },
+    deleteTask(id) {
+      axios
+        .delete("/task/" + id)
+        .then((response) => (this.tasks = response.data))
+        .catch((error) => console.log(error));
+    },
+    searchtask() {
+      if (this.q.length > 3) {
+        axios
+          .get("/taskslist/" + this.q)
+          .then((response) => (this.tasks = response.data))
+          .catch((error) => console.log(error));
+      } else {
+        axios
+          .get("/taskslist/")
+          .then((response) => (this.tasks = response.data))
+          .catch((error) => console.log(error));
+      }
+    },
     refresh(tasks) {
-        this.tasks = tasks.data
+      this.tasks = tasks.data;
     },
   },
   created() {

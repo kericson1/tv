@@ -23,7 +23,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <button type="button" class="btn btn-primary">Mettre à jour</button>
+            <button type="button" class="btn btn-primary" @click="update" data-dismiss="modal">Mettre à jour</button>
         </div>
         </div>
     </div>
@@ -33,7 +33,16 @@
 </template>
 <script>
 export default {
-    props: ['tasktoedit']
+    props: ['tasktoedit'],
+    methods: {
+        update() {
+            axios.patch('/task/edit/'+ this.tasktoedit.id, { 
+                name: this.tasktoedit.name
+            })
+            .then(response => this.$emit('task-updated', response))
+            .catch(error => console.log(error));
+        }
+    }
    
 };
 </script>
