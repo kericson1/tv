@@ -21,7 +21,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <router-link to="/home" class="nav-link active">Home</router-link>
+                            <router-link to="/home" class="nav-link active">Accueil</router-link>
                         </li>
                         <li class="nav-item">
                             <router-link to="/tasks" class="nav-link">Liste des tâches</router-link>
